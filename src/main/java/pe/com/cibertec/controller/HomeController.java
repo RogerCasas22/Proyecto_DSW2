@@ -27,9 +27,13 @@ import pe.com.cibertec.service.ProductoService;
 @RequestMapping("/")
 public class HomeController {
 	
+	private final Logger log = LoggerFactory.getLogger(HomeController.class);
+	
 	@Autowired
 	private ProductoService productoService;
 	
+
+	//mostrar productos en la home
 	@GetMapping("")
 	public String home(Model model, HttpSession session) {
 		
@@ -37,6 +41,13 @@ public class HomeController {
 		
 
 		return "usuario/home";
+	}
+	
+	//ver preducto por id
+	@GetMapping("productohome/{id}")
+	public String productoHome(@PathVariable Integer id) {
+		log.info("Id producto enviado como parámetro {}", id);
+		return "usuario/productohome";
 	}
 
 }
