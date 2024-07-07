@@ -1,5 +1,6 @@
 package pe.com.cibertec.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,12 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public void delete(Integer id) {
 		productoRepository.deleteById(id);		
+	}
+
+	//listar todos los productos
+	@Override
+	public List<Producto> findAll() {
+		return productoRepository.findAll();
 	}
 
 }
