@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
+import pe.com.cibertec.model.Orden;
 import pe.com.cibertec.model.Usuario;
 import pe.com.cibertec.service.IUsuarioService;
 
@@ -72,5 +73,11 @@ public class UsuarioController {
 			}
 			
 			return "redirect:/";
+		}
+		
+		@GetMapping("/compras")
+		public String obtenerCompras(Model model, HttpSession session) {
+			model.addAttribute("sesion", session.getAttribute("idusuario"));	
+			return "usuario/compras";
 		}
 }
