@@ -55,10 +55,13 @@ public class HomeController {
 	// mostrar productos en la home
 	@GetMapping("")
 	public String home(Model model, HttpSession session) {
-
+		
 		log.info("Sesion del usuario: {}", session.getAttribute("idusuario"));
-
+		
 		model.addAttribute("productos", productoService.findAll());
+		
+		//session
+		model.addAttribute("sesion", session.getAttribute("idusuario"));
 
 		return "usuario/home";
 	}
@@ -141,10 +144,12 @@ public class HomeController {
 	// poder acceder a carrtito desde cualquier vista
 	@GetMapping("/getCart")
 	public String getCart(Model model, HttpSession session) {
-
+		
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
-
+		
+		//sesion
+		model.addAttribute("sesion", session.getAttribute("idusuario"));
 		return "/usuario/carrito";
 	}
 
