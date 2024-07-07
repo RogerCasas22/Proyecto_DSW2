@@ -23,6 +23,7 @@ import pe.com.cibertec.model.DetalleOrden;
 import pe.com.cibertec.model.Orden;
 import pe.com.cibertec.model.Producto;
 import pe.com.cibertec.model.Usuario;
+import pe.com.cibertec.service.IUsuarioService;
 import pe.com.cibertec.service.ProductoService;
 
 @Controller
@@ -33,6 +34,9 @@ public class HomeController {
 
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
 
 	// para almacenar los detalles de la orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
@@ -135,7 +139,13 @@ public class HomeController {
 	}
 	
 	@GetMapping("/order")
-	public String order() {
+	public String order(Model model) {
+		
+		Usuario usuario =usuarioService.findById(1).get();
+		
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
 		
 		return "usuario/resumenorden";
 	}
