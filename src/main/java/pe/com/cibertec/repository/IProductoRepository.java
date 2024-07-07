@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import pe.com.cibertec.model.Producto;
 
 @Repository
-public interface ProductoRepository extends JpaRepository<Producto, Integer> {
+public interface IProductoRepository extends JpaRepository<Producto, Integer> {
 
 }
