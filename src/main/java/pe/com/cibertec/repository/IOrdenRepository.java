@@ -10,5 +10,5 @@ import pe.com.cibertec.model.Usuario;
 
 @Repository
 public interface IOrdenRepository extends JpaRepository<Orden, Integer> {
-	
+	List<Orden> findByUsuario (Usuario usuario);
 }

@@ -21,7 +21,7 @@ public class DetalleOrden {
 	private double total;
 	
 	//mapeos
-	@OneToOne
+	@ManyToOne
 	private Orden orden;
 	
 	@ManyToOne

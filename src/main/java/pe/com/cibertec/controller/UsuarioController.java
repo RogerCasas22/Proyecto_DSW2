@@ -18,16 +18,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.http.HttpSession;
 import pe.com.cibertec.model.Orden;
 import pe.com.cibertec.model.Usuario;
+import pe.com.cibertec.service.IOrdenService;
 import pe.com.cibertec.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
 	
+private final Logger logger= LoggerFactory.getLogger(UsuarioController.class);
+	
 	@Autowired
 	private IUsuarioService usuarioService;
 	
-	private final Logger logger= LoggerFactory.getLogger(UsuarioController.class);
+	@Autowired
+	private IOrdenService ordenService;
+	
 
 	
 	
@@ -77,7 +82,14 @@ public class UsuarioController {
 		
 		@GetMapping("/compras")
 		public String obtenerCompras(Model model, HttpSession session) {
-			model.addAttribute("sesion", session.getAttribute("idusuario"));	
+			model.addAttribute("sesion", session.getAttribute("idusuario"));
+			
+			Usuario usuario= usuarioService.findById(  Integer.parseInt(session.getAttribute("idusuario").toString()) ).get();
+			List<Orden> ordenes= ordenService.findByUsuario(usuario);
+			logger.info("ordenes {}", ordenes);
+			
+			model.addAttribute("ordenes", ordenes);
+			
 			return "usuario/compras";
 		}
 }
