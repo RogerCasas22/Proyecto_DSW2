@@ -7,5 +7,7 @@ import pe.com.cibertec.model.Orden;
 import pe.com.cibertec.model.Usuario;
 
 public interface IOrdenService {
+	
+	List<Orden> findAll();
 	Orden save (Orden orden);
 }
