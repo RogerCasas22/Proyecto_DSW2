@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
+import pe.com.cibertec.model.Producto;
 import pe.com.cibertec.service.ProductoService;
 
 @Controller
@@ -45,8 +46,14 @@ public class HomeController {
 	
 	//ver preducto por id
 	@GetMapping("productohome/{id}")
-	public String productoHome(@PathVariable Integer id) {
+	public String productoHome(@PathVariable Integer id, Model model) {
 		log.info("Id producto enviado como parámetro {}", id);
+		Producto producto = new Producto();
+		Optional<Producto> productoOptional = productoService.get(id);
+		producto = productoOptional.get();
+
+		model.addAttribute("producto", producto);
+
 		return "usuario/productohome";
 	}
 
