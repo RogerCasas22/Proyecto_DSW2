@@ -22,6 +22,7 @@ import jakarta.servlet.http.HttpSession;
 import pe.com.cibertec.model.DetalleOrden;
 import pe.com.cibertec.model.Orden;
 import pe.com.cibertec.model.Producto;
+import pe.com.cibertec.model.Usuario;
 import pe.com.cibertec.service.ProductoService;
 
 @Controller
@@ -131,5 +132,11 @@ public class HomeController {
 		model.addAttribute("orden", orden);
 		
 		return "/usuario/carrito";
+	}
+	
+	@GetMapping("/order")
+	public String order() {
+		
+		return "usuario/resumenorden";
 	}
 }
