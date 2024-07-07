@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pe.com.cibertec.model.Usuario;
 import pe.com.cibertec.service.IUsuarioService;
 
 @Controller
@@ -23,6 +24,8 @@ public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	private final Logger logger= LoggerFactory.getLogger(UsuarioController.class);
 
 	
 	
@@ -30,5 +33,13 @@ public class UsuarioController {
 		@GetMapping("/registro")
 		public String create() {
 			return "usuario/registro";
+		}
+		
+		@PostMapping("/save")
+		public String save(Usuario usuario) {
+			logger.info("Usuario registro: {}", usuario);
+			usuario.setTipo("USER");
+			usuarioService.save(usuario);		
+			return "redirect:/";
 		}
 }
